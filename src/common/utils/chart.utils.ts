@@ -1,4 +1,4 @@
-import { ISalesByMonth } from "../types/interface";
+import { ISalesByMonthOrDay } from "../types/interface";
 
 const allMonths = [
   "January",
@@ -16,7 +16,7 @@ const allMonths = [
 ];
 
 // Merge data with all months, adding missing months with sales as 0
-export const mergeData = (data: ISalesByMonth[]) =>
+export const mergeData = (data: ISalesByMonthOrDay[]) =>
   allMonths.map((month) => {
     const found = data.find(
       (d) => d.month?.toLowerCase() === month?.toLowerCase()

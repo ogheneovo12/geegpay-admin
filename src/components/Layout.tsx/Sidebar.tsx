@@ -8,6 +8,12 @@ import ExpandIcon from "@/assets/svg/arrow-right.svg";
 import LogoutIcon from "@/assets/svg/logout.svg";
 import SettingsIcon from "@/assets/svg/setting-2.svg";
 import cx from "classnames";
+import DarkModeToggle from "../DarkModeToggle";
+import { ThemeMode } from "../context/ThemeModeProvider";
+import { usePathname, useRouter } from "next/navigation";
+import { MenuItemType } from "antd/es/menu/hooks/useItems";
+import { useMemo } from "react";
+import { useDetectClickOutside } from "react-detect-click-outside";
 
 const menuCss = css`
   & .ant-menu-item {
@@ -17,23 +23,75 @@ const menuCss = css`
     justify-content: center;
     display: flex;
     align-items: center;
+    border-radius: 0px;
   }
   &.ant-menu-inline-collapsed .ant-menu-item .ant-menu-title-content {
     display: none;
   }
 `;
 
+function setMenuItemsActions(
+  action: (item: MenuItemType) => void,
+  activeKey: string
+) {
+  return menuItems.map((item) => {
+    if (item) {
+      (item as MenuItemType).onClick = action;
+      if (activeKey === item.key) {
+        item.className =
+          "relative rounded-l-0 after:content-[''] after:absolute after:bottom-0  after:right-0 after:h-full after:bg-secondary dark:after:bg-dark-txt after:w-[4px] after:rounded-l-[3px] ";
+      } else {
+        item.className = "";
+      }
+    }
+    return item;
+  });
+}
 function Sidebar({
   collapsed,
   setCollapsed,
   collapsedWidth,
+  theme,
 }: {
   collapsed: boolean;
   setCollapsed: (value: boolean) => void;
   collapsedWidth?: number;
+  theme: ThemeMode;
 }) {
+  const ref = useDetectClickOutside({
+    onTriggered: () => setCollapsed(true),
+  });
+  const router = useRouter();
+  const path = usePathname();
+  const menuList = useMemo(
+    () => setMenuItemsActions((item) => router.push(item.key as string), path),
+    [path, router]
+  );
+  const bottomMenuList = useMemo(
+    () => [
+      {
+        key: "expand",
+        icon: <ExpandIcon className={cx({ "rotate-180": !collapsed })} />,
+        label: collapsed ? "Expand" : "Collapse",
+        onClick: () => setCollapsed(!collapsed),
+      },
+      {
+        key: "Settings",
+        icon: <SettingsIcon />,
+        label: "Settings",
+      },
+      {
+        key: "logout",
+        icon: <LogoutIcon />,
+        label: "Logout",
+      },
+    ],
+    [collapsed, setCollapsed]
+  );
   return (
     <Sider
+      ref={ref}
+      theme={theme}
       collapsible
       collapsed={collapsed}
       onCollapse={(value) => setCollapsed(value)}
@@ -56,32 +114,16 @@ function Sidebar({
         <Menu
           defaultSelectedKeys={["1"]}
           mode="inline"
-          items={menuItems}
+          items={menuList}
           css={menuCss}
         />
+        <DarkModeToggle rotate={!collapsed} />
       </div>
       <div>
         <Menu
           defaultSelectedKeys={["1"]}
           mode="inline"
-          items={[
-            {
-              key: "expand",
-              icon: <ExpandIcon className={cx({ "rotate-180": !collapsed })} />,
-              label: collapsed ? "Expand" : "Collapse",
-              onClick: (e) => setCollapsed(!collapsed),
-            },
-            {
-              key: "Settings",
-              icon: <SettingsIcon />,
-              label: "Settings",
-            },
-            {
-              key: "logout",
-              icon: <LogoutIcon />,
-              label: "Logout",
-            },
-          ]}
+          items={bottomMenuList}
           css={menuCss}
         />
       </div>

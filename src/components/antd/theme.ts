@@ -1,19 +1,21 @@
-import { ThemeConfig, theme } from "antd";
+import { ThemeConfig } from "antd";
 
 export const appTheme: ThemeConfig = {
-  algorithm: theme.defaultAlgorithm,
+
   token: {
     colorPrimary: "#34CAA5",
     colorText: "#26282C",
     colorTextBase: "#26282C",
     fontFamily: "var(--plus-jarkata-sans)",
+    colorWhite: "#fff",
   },
   components: {
     Layout: {
-      siderBg: "#F7F8FA",
+      siderBg: "#141414",
       headerBg: "#FAFAFA",
       bodyBg: "#FAFAFA",
       triggerBg: "#FAFAFA",
+      lightSiderBg:"#F7F8FA",
     },
     Menu: {
       itemBg: "transparent",

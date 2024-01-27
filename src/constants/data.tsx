@@ -13,36 +13,37 @@ import {
 import type { MenuProps } from "antd";
 import dayjs from "dayjs";
 
+
 type MenuItem = Required<MenuProps>["items"][number];
 
 export const menuItems: MenuItem[] = [
   {
-    key: "home",
-    label: "Home",
+    key: "/",
+    label: "Dashboard",
     icon: <CategoryIcon />,
   },
   {
-    key: "trends",
+    key: "/trends",
     label: "TrendUpIcon",
     icon: <TrendUpIcon />,
   },
   {
-    key: "users",
+    key: "/users",
     label: "Users",
     icon: <UserIcon />,
   },
   {
-    key: "products",
+    key: "/products",
     label: "Products",
     icon: <BoxIcon />,
   },
   {
-    key: "coupons",
+    key: "/coupons",
     label: "Coupons",
     icon: <DiscountShapeIcon />,
   },
   {
-    key: "info",
+    key: "/info",
     label: "InfoIcon",
     icon: <InfoIcon />,
   },

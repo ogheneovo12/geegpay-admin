@@ -3,6 +3,7 @@ import "./globals.css";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import MainLayout from "@/components/Layout.tsx/MainLayout";
 import { inter, plusJakartaSans } from "@/assets/fonts";
+import { ThemeModeProvider } from "@/components/context/ThemeModeProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,7 +19,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} ${plusJakartaSans.className}`}>
         <AntdRegistry>
-          <MainLayout>{children}</MainLayout>
+          <ThemeModeProvider>
+            <MainLayout>{children}</MainLayout>
+          </ThemeModeProvider>
         </AntdRegistry>
       </body>
     </html>

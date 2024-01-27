@@ -4,7 +4,8 @@ import { IPlatformData } from "@/common/types/interface";
 import { formatCurrency } from "@/common/utils/currency.utils";
 import { css } from "@emotion/react";
 import { Card, List, Progress, Typography } from "antd";
-
+import { v4 } from "uuid";
+import { useMode } from "./context/ThemeModeProvider";
 
 function PlatformList({
   header,
@@ -13,6 +14,7 @@ function PlatformList({
   header: React.ReactNode;
   data: IPlatformData[];
 }) {
+  const { mode } = useMode();
   return (
     <Card
       className="p-0"
@@ -29,8 +31,8 @@ function PlatformList({
         itemLayout="vertical"
         renderItem={(item) => {
           return (
-            <List.Item>
-              <Typography.Text className="text-lg font-semibold text-[#22242C]">
+            <List.Item key={v4()}>
+              <Typography.Text className="text-lg font-semibold dark:text-dark-txt text-[#22242C]">
                 {item?.platform}
               </Typography.Text>
               <Progress
@@ -38,9 +40,9 @@ function PlatformList({
                 strokeColor={item?.brandColor}
                 percent={item?.percentage}
                 showInfo={false}
-                trailColor="#F5F5F5"
+                trailColor={mode === "dark" ? "#4B5563" : "#F5F5F5"}
               />
-              <div className="flex items-center justify-between text-lg text-[#525252]">
+              <div className="flex items-center justify-between text-lg dark:text-dark-txt text-[#525252]">
                 <p>{formatCurrency(item.amount?.toFixed(0), "$")}</p>
                 <p>+{item.percentage}%</p>
               </div>

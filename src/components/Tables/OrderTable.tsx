@@ -37,7 +37,7 @@ const columns: TableProps<IOrder>["columns"] = [
     dataIndex: "amount",
     key: "amount",
     render: (amount: number) => (
-      <span className="text-base font-medium text-secondary">
+      <span className="text-base font-medium text-secondary dark:text-dark-txt">
         {formatCurrency(amount?.toFixed(), "$")}
       </span>
     ),
@@ -61,7 +61,7 @@ const columns: TableProps<IOrder>["columns"] = [
     render: (invoice: string) => (
       <span className="flex items-center space-x-[6px]">
         <DocumentDownload />
-        <Link href="#" className="text-secondary">
+        <Link href="#" className="text-secondary dark:text-dark-txt">
           View
         </Link>
       </span>
@@ -88,9 +88,9 @@ function OrderTable({
           padding-top: 0px;
         }
       `}
-      title={<h4 className="text-base sm:text-lg font-semibold">Last Orders</h4>}
+      title={<h4 className="text-base sm:text-lg font-semibold dark:text-dark-txt">Last Orders</h4>}
       extra={
-        <Link href="/#" className="text-status-paid text-lg font-medium">
+        <Link href="/#" className="text-status-paid dark:text-dark-txt text-lg font-medium">
           See All
         </Link>
       }

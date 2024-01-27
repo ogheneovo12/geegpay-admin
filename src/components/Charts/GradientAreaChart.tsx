@@ -3,6 +3,7 @@ import React from "react";
 import type { AreaConfig } from "@ant-design/plots";
 import dynamic from "next/dynamic";
 import { ISalesByMonthOrDay, TrendType } from "@/common/types/interface";
+import { useMode } from "../context/ThemeModeProvider";
 
 const Area = dynamic(
   () => import("@ant-design/plots").then((mod) => mod.Area),
@@ -26,7 +27,9 @@ const GradientAreaChart = ({
   trend: TrendType;
   data: ISalesByMonthOrDay[];
 }) => {
+  const { mode } = useMode();
   const config: AreaConfig = {
+    theme: mode === "dark" ? "classicDark" : "classic",
     data,
     height: 70,
     xField: "day",

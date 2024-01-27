@@ -19,6 +19,8 @@ const config: Config = {
         "alert-error": "#ED544E",
         "neutral-500": "#737373",
         "status-paid": "#34CAA5",
+        "dark-txt": "#9ca4ab",
+        "dark-area": "#141414",
       },
       fontFamily: {
         jakarta: "var(--plus-jarkata-sans)",
@@ -31,6 +33,6 @@ const config: Config = {
   },
   plugins: [],
   important: true,
-  darkMode: 'class',
+  darkMode: "class",
 };
 export default config;
