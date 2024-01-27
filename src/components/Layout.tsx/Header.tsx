@@ -7,6 +7,7 @@ import type { MenuProps } from "antd";
 import Link from "next/link";
 import ProfileIcon from "@/assets/svg/profile-2user.svg";
 import ArrowIcon from "@/assets/svg/arrow-down.svg";
+import ExpandIcon from "@/assets/svg/arrow-right.svg";
 
 const items: MenuProps["items"] = [
   {
@@ -34,14 +35,26 @@ function LayoutHeader({
   setCollapsed: (value: boolean) => void;
 }) {
   return (
-    <Header className="py-[18px] border-b border-[#E5EAEF] leading-normal h-auto min-h-[70px] flex items-center justify-between">
-      <h3 className="font-semibold text-xl">Dashboard</h3>
-      <div className="flex items-center space-x-[22px] w-full max-w-[800px]">
+    <Header className="py-[18px] px-[18px] border-b space-x-5 border-[#E5EAEF] leading-normal h-auto min-h-[70px] flex items-center justify-between">
+     <div className="flex items-center space-x-2">
+        <button
+          className="h-10 w-10 rounded-full flex items-center justify-center border border-light-brd flex-shrink-0 xs:hidden"
+          onClick={() => setCollapsed(!collapsed)}
+        >
+          <ExpandIcon className="transform" />
+        </button>
+        <h3 className="font-semibold text-base sm:text-xl">Dashboard</h3>
+     </div>
+   
+      <div className="flex items-center space-x-3 sm:space-x-[22px] w-full max-w-[800px] justify-end">
         <Input
-          className="h-[48px] rounded-[24px] border-light-brd w-full max-w-[333px]"
+          className="h-[48px] rounded-[24px] border-light-brd w-full max-w-[333px]  hidden lg:flex"
           prefix={<SearchIcon />}
         />
-        <div className="flex items-center flex-shrink-0">
+        <button className="lg:hidden h-10 w-10 rounded-full flex items-center justify-center border border-light-brd flex-shrink-0">
+          <SearchIcon />
+        </button>
+        <div className="md:flex items-center flex-shrink-0 hidden ">
           <CalendarIcon />
           <span className="ml-4 text-sm font-medium">{dayjs().format("MMMM DD, YYYY")}</span>
         </div>
@@ -51,11 +64,11 @@ function LayoutHeader({
         <Dropdown menu={{ items }}>
           <div className="flex items-center space-x-2 border border-light-brd px-2 py-[6px] rounded-[28px]">
             <Avatar className="h-[38px] w-[38px]" />
-            <span>
+            <span className="hidden md:inline-block">
               <p className="text-base">Justin Bergson</p>
               <span className="text-sm text-sec-text">Justin@gmail.com</span>
             </span>
-            <ArrowIcon />
+            <ArrowIcon className="hidden sm:inline-block" />
           </div>
         </Dropdown>
       </div>

@@ -1,36 +1,56 @@
 import TrendDownIcon from "@/assets/svg/trenddown.svg";
 import TrendUpIcon from "@/assets/svg/trendup.svg";
 import React, { useMemo } from "react";
+import GradientAreaChart from "./Charts/GradientAreaChart";
+import { ISalesByMonthOrDay, TrendType } from "@/common/types/interface";
 export interface IstatsCardProps {
   icon?: React.ReactNode;
   title?: string;
   value?: string;
   percentageValue: number;
+  data: ISalesByMonthOrDay[];
 }
 
-const trendIcon = {
-  up: {
+const trendIcon: Record<
+  string,
+  {
+    icon: React.ReactNode;
+    color: string;
+    key: TrendType;
+  }
+> = {
+  rising: {
     icon: <TrendUpIcon />,
     color: "#34CAA5",
+    key: "rising",
   },
-  down: {
+  falling: {
     icon: <TrendDownIcon />,
     color: "#ED544E",
+    key: "falling",
   },
 };
 
-function StatsCard({ title, value, percentageValue, icon }: IstatsCardProps) {
+function StatsCard({
+  title,
+  value,
+  percentageValue,
+  icon,
+  data = [],
+}: IstatsCardProps) {
   const trend = useMemo(
-    () => trendIcon[percentageValue < 0 ? "down" : "up"],
+    () => trendIcon[percentageValue < 0 ? "falling" : "rising"],
     [percentageValue]
   );
   return (
     <div className="bg-white p-4 rounded-[14px] border border-[#EDF2F7]">
-      <div>
-        <span className="h-10 w-10 border border-[#E6E6E6] flex items-center justify-center rounded-full">
+      <div className="flex items-center justify-between">
+        <span className="h-10 w-10 border flex-shrink-0 border-[#E6E6E6] flex items-center justify-center rounded-full">
           {icon}
         </span>
-        <div>{/* Graph */}</div>
+        <div className="w-full max-w-[150px]">
+          <GradientAreaChart trend={trend.key} data={data} />
+        </div>
       </div>
       <div className="mt-[10px]">
         <h4 className="text-lg font-medium text-light-pink">{title}</h4>

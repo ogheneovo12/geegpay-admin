@@ -8,11 +8,7 @@ import dayjs from "dayjs";
 import Link from "next/link";
 import cx from "classnames";
 import { css } from "@emotion/react";
-
-const statusColorClass: Record<string, string> = {
-  refund: "text-alert-error",
-  paid: "text-status-paid",
-};
+import { statusColorClass } from "@/constants/data";
 
 const columns: TableProps<IOrder>["columns"] = [
   {
@@ -73,19 +69,26 @@ const columns: TableProps<IOrder>["columns"] = [
   },
 ];
 
-function OrderTable({ data = [] }: { data: IOrder[] }) {
+function OrderTable({
+  data = [],
+  className,
+}: {
+  data: IOrder[];
+  className?: string;
+}) {
   return (
     <Card
+      className={className}
       css={css`
         & .ant-card-head {
-          padding: 18px  24px !important;
+          padding: 18px 24px !important;
           border-bottom: none;
         }
         & .ant-card-body {
           padding-top: 0px;
         }
       `}
-      title={<span>Last Orders</span>}
+      title={<h4 className="text-base sm:text-lg font-semibold">Last Orders</h4>}
       extra={
         <Link href="/#" className="text-status-paid text-lg font-medium">
           See All

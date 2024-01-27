@@ -2,7 +2,7 @@
 
 import SalesTrendChart from "@/components/Charts/SalesTrendChart";
 import NoSsr from "@/components/NoSsr";
-import { salesTrendData } from "@/constants/data";
+import { salesByMonth } from "@/constants/data";
 import { useState } from "react";
 
 function SalesGraph() {
@@ -10,7 +10,7 @@ function SalesGraph() {
   return (
     <div>
       <SalesTrendChart
-        salesData={salesTrendData}
+        salesData={salesByMonth}
         filterValue={filterVlaue}
         onFilterChange={setFilterValue}
       />

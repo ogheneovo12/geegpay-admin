@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import MainLayout from "@/components/Layout.tsx/MainLayout";
-
-const inter = Inter({ subsets: ["latin"] });
+import { inter, plusJakartaSans } from "@/assets/fonts";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.variable} ${plusJakartaSans.className}`}>
         <AntdRegistry>
           <MainLayout>{children}</MainLayout>
         </AntdRegistry>

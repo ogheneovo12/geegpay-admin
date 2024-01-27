@@ -6,6 +6,7 @@ export const appTheme: ThemeConfig = {
     colorPrimary: "#34CAA5",
     colorText: "#26282C",
     colorTextBase: "#26282C",
+    fontFamily:"var(--plus-jarkata-sans)"
   },
   components: {
     Layout: {

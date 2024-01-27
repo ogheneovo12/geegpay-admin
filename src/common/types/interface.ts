@@ -1,5 +1,6 @@
-export interface ISalesByMonth {
-  month: string;
+export interface ISalesByMonthOrDay {
+  month?: string;
+  day?: number;
   sales: number;
 }
 
@@ -22,3 +23,5 @@ export interface IPlatformData {
   percentage: number;
   brandColor?: string;
 }
+
+export type TrendType = "rising" | "falling";

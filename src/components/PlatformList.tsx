@@ -1,7 +1,7 @@
 "use client";
 import { IPlatformData } from "@/common/types/interface";
 import { formatCurrency } from "@/common/utils/currency.utils";
-import { Divider, List, Progress, Typography } from "antd";
+import { List, Progress, Typography } from "antd";
 
 function PlatformList({
   header,

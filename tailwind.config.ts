@@ -20,6 +20,13 @@ const config: Config = {
         "neutral-500": "#737373",
         "status-paid": "#34CAA5",
       },
+      fontFamily: {
+        jakarta: "var(--plus-jarkata-sans)",
+        inter: "var(--inter)",
+      },
+      screens: {
+        xs: "36rem",
+      },
     },
   },
   plugins: [],
