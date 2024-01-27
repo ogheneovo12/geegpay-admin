@@ -1,8 +1,12 @@
+/** @jsxImportSource @emotion/react */
+"use client";
 import TrendDownIcon from "@/assets/svg/trenddown.svg";
 import TrendUpIcon from "@/assets/svg/trendup.svg";
 import React, { useMemo } from "react";
 import GradientAreaChart from "./Charts/GradientAreaChart";
 import { ISalesByMonthOrDay, TrendType } from "@/common/types/interface";
+import { Card } from "antd";
+import { css } from "@emotion/react";
 export interface IstatsCardProps {
   icon?: React.ReactNode;
   title?: string;
@@ -43,7 +47,14 @@ function StatsCard({
     [percentageValue]
   );
   return (
-    <div className="bg-white p-4 rounded-[14px] border border-[#EDF2F7]">
+    <Card
+      css={css`
+        & .ant-card-body {
+          padding: 0px !important;
+        }
+      `}
+      className=" p-4 rounded-[14px] border border-[#EDF2F7]"
+    >
       <div className="flex items-center justify-between">
         <span className="h-10 w-10 border flex-shrink-0 border-[#E6E6E6] flex items-center justify-center rounded-full">
           {icon}
@@ -66,7 +77,7 @@ function StatsCard({
         </span>
         <span className="text-bluish-grey">vs. previous month</span>
       </div>
-    </div>
+    </Card>
   );
 }
 
